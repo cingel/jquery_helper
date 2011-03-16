@@ -8,6 +8,15 @@ module ActionView
             call "jQuery('##{id}').html", render(*options_for_render)
           end
           
+          def insert_html(position, id, *options_for_render)
+            jquery_method = case position
+            when :top then "prepend" 
+            when :bottom then "append"
+            else position
+            end
+            call "jQuery('##{id}').#{jquery_method}", render(*options_for_render)
+          end
+          
         end
       end
     end
